@@ -1,0 +1,25 @@
+:root {
+  --muse-layout-spacing-xsm: 2px;
+  --muse-layout-spacing-sm: 5px;
+  --muse-layout-spacing-md: 10px;
+
+  --muse-layout-gap-xsm: var(--muse-layout-spacing-xsm);
+  --muse-layout-gap-sm: var(--muse-layout-spacing-sm);
+  --muse-layout-gap-md: var(--muse-layout-spacing-md);
+
+  --muse-layout-padding-xsm: var(--muse-layout-spacing-xsm);
+  --muse-layout-padding-sm: var(--muse-layout-spacing-sm);
+  --muse-layout-padding-md: var(--muse-layout-spacing-md);
+
+  --muse-colours-primary-solid: hsl(163, 61%, 33%);
+  --muse-colours-primary-bg-solid: var(--muse-colours-primary-solid);
+
+  --muse-font-size-xsm: 12px;
+  --muse-font-size-sm: 14px;
+  --muse-font-size-md: 16px;
+  --muse-font-size-lg: 24px;
+}
+
+body {
+  font-size: var(--muse-font-size-md);
+}
