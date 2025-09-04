@@ -16,11 +16,11 @@ export const uuid = {
 const HEX = Array.from({ length: 256 }).map((_, i) => (i + 0x100).toString(16).slice(1));
 
 const getBytesBrowser = (length: number) => {
-  if (typeof crypto === 'undefined' || !crypto?.getRandomValues) return false;
+  if (typeof crypto === 'undefined' || !crypto?.getRandomValues) return;
   return crypto.getRandomValues(new Uint8Array(length));
 };
 
 const getBytesServer = (length: number) => {
-  if (typeof require !== 'function') return false;
+  if (typeof require !== 'function') return;
   return require('crypto').randomBytes(length);
 };

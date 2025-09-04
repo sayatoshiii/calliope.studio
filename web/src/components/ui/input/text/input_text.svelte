@@ -1,18 +1,46 @@
-<script>
-	export let name;
-	export let description;
+<script lang="ts">
+	import { uuid } from '../../../../utils/misc/crypto';
+	import type { InputTextProps } from './types';
 
-	export let placeholder;
-	export let value = '';
+	let {
+		label,
+		description,
+		placeholder,
+		maxlength,
+		type = 'text',
+		value,
+		onChange,
+		inputContainer,
+		id = uuid.v4()
+	}: InputTextProps = $props();
 
-	export let id;
+	const onInput = (event: Event) => {
+		onChange?.((event.target as HTMLInputElement)?.value, event);
+	};
 </script>
 
-{#if name || description}
-	<label for={id}>
-		{#if name}<b>{name}</b>{/if}
-		{#if description}{description}{/if}
-	</label>
+{#if label || description}
+	<aside>
+		{#if label}
+			<label for={id}>
+				<strong>{label}</strong>
+			</label>
+		{/if}
+		{#if description}
+			<small id={`${id}-description`}>{description}</small>
+		{/if}
+	</aside>
 {/if}
 
-<input type="text" bind:value {placeholder} {id} />
+<div>
+	<input
+		{type}
+		{value}
+		{placeholder}
+		{maxlength}
+		aria-describedby={description && `${id}-description`}
+		oninput={onInput}
+		{id}
+	/>
+	{@render inputContainer?.()}
+</div>
