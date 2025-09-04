@@ -4,21 +4,21 @@
 	import type { InputTextProps } from './types';
 
 	let props: InputTextProps = $props();
+
 	let hidePassword = $state(true);
+	const ToggleVisibilityIcon = $derived(hidePassword ? Eye : EyeOff);
 </script>
 
 <InputText type={hidePassword ? 'password' : 'text'} {...props}>
 	{#snippet inputContainer()}
 		<button
+			type="button"
+			aria-label={hidePassword ? 'Show password' : 'Hide password'}
 			onclick={() => {
 				hidePassword = !hidePassword;
 			}}
 		>
-			{#if hidePassword}
-				<Eye />
-			{:else}
-				<EyeOff />
-			{/if}
+			<ToggleVisibilityIcon />
 		</button>
 	{/snippet}
 </InputText>
