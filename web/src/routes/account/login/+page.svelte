@@ -1,19 +1,19 @@
 <script>
-	import { Sparkles } from '@lucide/svelte';
+	import { KeyRound } from '@lucide/svelte';
 	import InputButton from '../../../components/ui/input/button/input_button.svelte';
 	import InputPassword from '../../../components/ui/input/text/input_password.svelte';
 	import InputText from '../../../components/ui/input/text/input_text.svelte';
 	import { MuseUIColour } from '../../../components/ui/types';
 	import { getInputValue } from '../../../utils/page/input';
-	import { accountCreate, user } from '../../../utils/database/client/account';
+	import { accountLogin, user } from '../../../utils/database/client/account';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 
-	const handleAccountCreate = async () => {
+	const handleAccountLogin = async () => {
 		const email = getInputValue('input_account_email');
 		const password = getInputValue('input_account_password');
 
-		await accountCreate(email, password);
+		await accountLogin(email, password);
 		goto('/app');
 	};
 
@@ -24,16 +24,16 @@
 
 <InputText
 	label={'Email'}
-	description={'Please pick an email for your account'}
+	description={'Please enter your account email'}
 	id={'input_account_email'}
 />
 
 <InputPassword
 	label={'Password'}
-	description={'Please pick a password for your account'}
+	description={'Please enter your account password'}
 	id={'input_account_password'}
 />
 
-<InputButton colour={MuseUIColour.PRIMARY} onclick={handleAccountCreate}>
-	<Sparkles /> Create Account
+<InputButton colour={MuseUIColour.PRIMARY} onclick={handleAccountLogin}>
+	<KeyRound /> Login
 </InputButton>

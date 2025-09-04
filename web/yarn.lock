@@ -595,6 +595,11 @@ ansi-styles@^4.1.0:
   dependencies:
     color-convert "^2.0.1"
 
+appwrite@^19.0.0:
+  version "19.0.0"
+  resolved "https://registry.yarnpkg.com/appwrite/-/appwrite-19.0.0.tgz#7eb77f27a93e55ca03078d2cb049e00eb64e5d21"
+  integrity sha512-guamzST6Fvn/lvuBMLJGzJGL+N+o313j53qyfKM1ZHfcDd1ADnSONgm9DZihRFYBaWtU7s1bwkphkBJWSUwurQ==
+
 argparse@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/argparse/-/argparse-2.0.1.tgz#246f50f3ca78a3240f6c997e8a9bd1eac49e4b38"

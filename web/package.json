@@ -15,6 +15,7 @@
 	},
 	"dependencies": {
 		"@lucide/svelte": "^0.542.0",
+		"appwrite": "^19.0.0",
 		"lucide": "^0.542.0"
 	},
 	"devDependencies": {
