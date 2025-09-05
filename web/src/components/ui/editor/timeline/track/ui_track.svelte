@@ -13,16 +13,13 @@
 		{trackType}
 		{track?.position}
 	</aside>
-	<div class="timeline"></div>
+
+	<div class="timeline rounded"></div>
 </section>
 
 <style>
 	.track {
-		display: flex;
-		flex-flow: row nowrap;
-
-		flex: 1 1;
-		overflow: auto;
+		display: contents;
 	}
 
 	.info {
@@ -30,14 +27,20 @@
 		flex-flow: row wrap;
 
 		align-items: center;
-		gap: var(--muse-layout-gap-sm);
+		gap: var(--muse-layout-spacing-sm);
+
+		padding: var(--muse-layout-spacing-sm) var(--muse-layout-spacing-md);
+		grid-column: 1;
+
+		color: var(--muse-colours-muted-solid);
 	}
 
 	.timeline {
-		flex: 1 1;
+		border: 1px solid var(--muse-colours-subtle-light);
+		grid-column: 2;
 	}
 
 	.track:nth-of-type(even) .timeline {
-		background: red;
+		background-color: var(--muse-colours-subtle-very-light);
 	}
 </style>

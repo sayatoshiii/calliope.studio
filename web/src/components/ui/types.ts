@@ -1,5 +1,6 @@
 export enum MuseUIColour {
-  PRIMARY = 'primary'
+    PRIMARY = 'primary',
+    MUTED = 'muted'
 }
 
 export enum MuseUISize {

@@ -23,10 +23,10 @@
 		}
 	});
 
-	const handleLogout = async () => {
-		await accountLogout();
-		goto('/account/login');
-	};
+	// const handleLogout = async () => {
+	// 	await accountLogout();
+	// 	goto('/account/login');
+	// };
 
 	onMount(() => {
 		if (!user) goto('/account/create');
@@ -35,5 +35,5 @@
 
 <UiTimeline {...timeline} />
 
-<div>hi</div>
-<InputButton onclick={handleLogout}>Log Out</InputButton>
+<!-- <div>hi</div> -->
+<!-- <InputButton onclick={handleLogout}>Log Out</InputButton> -->

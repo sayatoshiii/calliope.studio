@@ -1,17 +1,11 @@
 export interface EditorTimelineProps {
   tracks?: Record<string, EditorTimelineTrack>;
-  view?: {
-    zoom?: number;
-    position?: number;
-  };
-  marker?: {
-    position?: number;
-  };
+  zoom?: number;
 }
 
 export interface EditorTimelineTrack {
   type: EditorTimelineTrackType;
-  position?: number;
+  position: number;
 }
 
 export enum EditorTimelineTrackType {
