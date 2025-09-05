@@ -1,6 +1,7 @@
 export interface EditorTimelineProps {
   tracks?: Record<string, EditorTimelineTrack>;
   zoom?: number;
+  marker: number;
 }
 
 export interface EditorTimelineTrack {
