@@ -9,6 +9,9 @@
 		type EditorTimelineProps
 	} from '../../components/ui/editor/timeline/types';
 	import UiPreview from '../../components/ui/editor/preview/ui_preview.svelte';
+	import UiModule from '../../components/ui/editor/module/ui_module.svelte';
+	import { EditorModulePosition } from '../../components/ui/editor/module/types';
+	import UiNavbar from '../../components/ui/navigation/ui_navbar.svelte';
 
 	const timeline: EditorTimelineProps = $state({
 		tracks: {
@@ -30,7 +33,12 @@
 </script>
 
 <app>
-	<UiPreview />
+	<UiNavbar />
+	<section>
+		<UiModule position={EditorModulePosition.TOP_LEFT} />
+		<UiPreview />
+		<UiModule position={EditorModulePosition.TOP_RIGHT} />
+	</section>
 	<UiTimeline {...timeline} />
 </app>
 
@@ -41,5 +49,13 @@
 
 		display: flex;
 		flex-flow: column;
+	}
+
+	section {
+		display: flex;
+		flex-flow: row wrap;
+
+		align-items: stretch;
+		flex: 1 1;
 	}
 </style>
