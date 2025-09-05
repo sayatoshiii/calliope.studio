@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ListMusic, ListVideo } from '@lucide/svelte';
+	import { Headphones, ListMusic, ListVideo, Videotape } from '@lucide/svelte';
 	import InputButton from '../../input/button/input_button.svelte';
 	import { MuseUIColour } from '../../types';
 	import UiToolbar from './toolbar/ui_toolbar.svelte';
@@ -7,6 +7,8 @@
 	import { EditorTimelineTrackType, type EditorTimelineProps } from './types';
 	import UiRuler from './ui_ruler.svelte';
 	import { uuid } from '../../../../utils/misc/crypto';
+	import Tooltip from '../../hints/tooltip/tooltip.svelte';
+	import { TooltipPosition } from '../../hints/tooltip/types';
 
 	let { tracks, zoom = 1, marker = 0 }: EditorTimelineProps = $props();
 
@@ -41,16 +43,27 @@
 		{/each}
 
 		<aside class="manage">
-			<InputButton colour={MuseUIColour.MUTED} class="rounded" onclick={() => handleNewTrack()}>
-				<ListVideo size={20} />
-			</InputButton>
-			<InputButton
-				colour={MuseUIColour.MUTED}
-				class="rounded"
-				onclick={() => handleNewTrack(EditorTimelineTrackType.AUDIO)}
-			>
-				<ListMusic size={20} />
-			</InputButton>
+			<Tooltip position={TooltipPosition.BOTTOM_LEFT}>
+				{#snippet message()}
+					<Videotape color="var(--muse-colours-muted-solid)" /> Create Video Track
+				{/snippet}
+				<InputButton colour={MuseUIColour.MUTED} class="rounded" onclick={() => handleNewTrack()}>
+					<ListVideo size={20} />
+				</InputButton>
+			</Tooltip>
+
+			<Tooltip position={TooltipPosition.BOTTOM_LEFT}>
+				{#snippet message()}
+					<Headphones color="var(--muse-colours-muted-solid)" /> Create Audio Track
+				{/snippet}
+				<InputButton
+					colour={MuseUIColour.MUTED}
+					class="rounded"
+					onclick={() => handleNewTrack(EditorTimelineTrackType.AUDIO)}
+				>
+					<ListMusic size={20} />
+				</InputButton>
+			</Tooltip>
 		</aside>
 	</div>
 </section>

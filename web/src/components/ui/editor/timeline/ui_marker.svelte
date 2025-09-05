@@ -17,7 +17,7 @@
 
 		background-color: var(--muse-colours-muted-solid);
 		transform: translateX(var(--position));
-		transition: transform 0.25s ease;
+		transition: transform 0.15s ease;
 	}
 
 	.tag {

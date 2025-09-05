@@ -6,9 +6,6 @@
 	const handleMarker = {
 		mouseOver: (e: MouseEvent) => {
 			marker = e.offsetX;
-		},
-		mouseLeave: () => {
-			//zoom = 0;
 		}
 	};
 </script>
@@ -16,9 +13,7 @@
 <div
 	class="ruler"
 	style={`--zoom: ${zoom}`}
-	onmouseover={handleMarker.mouseOver}
-	onmouseout={handleMarker.mouseLeave}
-	onblur={handleMarker.mouseLeave}
+	onmousemove={handleMarker.mouseOver}
 	role="region"
 	aria-label="video timeline ruler"
 >
@@ -27,7 +22,7 @@
 
 <style>
 	.ruler {
-		height: 5px;
+		height: 15px;
 
 		grid-column: 2;
 		border-top: 1px solid var(--muse-colours-subtle-light-solid);
@@ -39,5 +34,10 @@
 			transparent 1px,
 			transparent calc(50px * var(--zoom, 1))
 		);
+
+		-webkit-user-select: none;
+		user-select: none;
+
+		cursor: pointer;
 	}
 </style>
