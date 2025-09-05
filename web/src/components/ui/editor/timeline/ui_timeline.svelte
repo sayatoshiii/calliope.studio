@@ -57,7 +57,10 @@
 
 <style>
 	.view {
-		flex: 1 1;
+		padding: var(--muse-layout-spacing-md);
+		padding-top: 0;
+
+		border-top: 1px solid var(--muse-colours-subtle-light);
 	}
 
 	.timeline {
@@ -70,6 +73,7 @@
 		grid-template-columns: auto 1fr;
 
 		row-gap: var(--muse-layout-spacing-sm);
+		grid-gap: var(--muse-layout-spacing-md);
 	}
 
 	.manage {

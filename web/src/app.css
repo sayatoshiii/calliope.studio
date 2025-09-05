@@ -4,8 +4,10 @@
   --muse-layout-spacing-xsm: 2px;
   --muse-layout-spacing-sm: 5px;
   --muse-layout-spacing-md: 10px;
+  --muse-layout-spacing-lg: 15px;
 
   --muse-colours-background: hsl(240, 19%, 6%);
+  --muse-colours-foreground: hsl(240, 12%, 8%);
 
   --muse-colours-primary-solid: hsl(163, 61%, 33%);
   --muse-colours-primary-bg-solid: var(--muse-colours-primary-solid);
@@ -20,11 +22,16 @@
   --muse-colours-muted-solid: hsl(240, 4%, 45%);
   --muse-colours-muted-background: hsl(240, 10%, 14%);
   --muse-colours-semi-important: hsla(0, 0%, 100%, 0.65);
+  --muse-colours-important: hsla(0, 0%, 100%, 0.85);
 
   --muse-font-size-xsm: 12px;
   --muse-font-size-sm: 14px;
   --muse-font-size-md: 16px;
   --muse-font-size-lg: 24px;
+}
+
+html,body {
+  min-height: 100vh;
 }
 
 body {
