@@ -1,14 +1,31 @@
 <script>
-	import { ImageUp } from '@lucide/svelte';
+	import { FilePlus, FileStack, ImageUp } from '@lucide/svelte';
+	import InputFile from '../../../input/file/input_file.svelte';
 </script>
 
-<section class="rounded">
-	<ImageUp size={40} strokeWidth={1.5} color={'var(--muse-colours-muted-solid)'} />
-	<div class="info">
-		<span>Upload Media</span>
-		Drag or select media files for this project
-	</div>
-</section>
+<InputFile>
+	{#snippet hovered(files)}
+		<section class="rounded">
+			{#if (files?.length ?? 0) > 1}
+				<FileStack size={40} strokeWidth={1.5} color={'var(--muse-colours-muted-solid)'} />
+			{:else}
+				<FilePlus size={40} strokeWidth={1.5} color={'var(--muse-colours-muted-solid)'} />
+			{/if}
+			<div class="info">
+				<span>Drop Media</span>
+				You can drop your media here to add to your project!
+			</div>
+		</section>
+	{/snippet}
+
+	<section class="rounded">
+		<ImageUp size={40} strokeWidth={1.5} color={'var(--muse-colours-muted-solid)'} />
+		<div class="info">
+			<span>Select Files</span>
+			Drag or select media files for this project
+		</div>
+	</section>
+</InputFile>
 
 <style>
 	section {
