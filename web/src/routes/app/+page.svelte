@@ -10,7 +10,7 @@
 	} from '../../components/ui/editor/timeline/types';
 	import UiPreview from '../../components/ui/editor/preview/ui_preview.svelte';
 	import UiModule from '../../components/ui/editor/module/ui_module.svelte';
-	import { EditorModulePosition } from '../../components/ui/editor/module/types';
+	import { EditorModulePosition, EditorModuleType } from '../../components/ui/editor/module/types';
 	import UiNavbar from '../../components/ui/navigation/ui_navbar.svelte';
 
 	const timeline: EditorTimelineProps = $state({
@@ -35,9 +35,9 @@
 <app>
 	<UiNavbar />
 	<section>
-		<UiModule position={EditorModulePosition.TOP_LEFT} />
+		<UiModule position={EditorModulePosition.TOP_LEFT} module={EditorModuleType.FILE_EXPLORER} />
 		<UiPreview />
-		<UiModule position={EditorModulePosition.TOP_RIGHT} />
+		<UiModule position={EditorModulePosition.TOP_RIGHT} module={EditorModuleType.INSPECTOR} />
 	</section>
 	<UiTimeline {...timeline} />
 </app>
