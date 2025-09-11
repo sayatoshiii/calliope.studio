@@ -58,9 +58,24 @@
 {/if}
 
 <style>
+	.loading {
+		width: 100%;
+		height: 100%;
+
+		display: flex;
+
+		justify-content: center;
+		align-items: center;
+
+		position: absolute;
+	}
+
 	.loader {
 		width: 9px;
-		height: 9px;
+		height: 18px;
+
+		transform: scale(0.5) translateY(-14px);
+
 		background: #000;
 		color: #000;
 		filter: invert(100%) sepia(100%) saturate(2000%) hue-rotate(190deg);

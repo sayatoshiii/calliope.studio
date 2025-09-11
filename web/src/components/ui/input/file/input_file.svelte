@@ -10,7 +10,7 @@
 	let files: DataTransferItemList | undefined = $state(undefined);
 
 	let isFileHovering = $state(false);
-	let Display = $derived(isFileHovering ? hovered : children);
+	let Display = $derived(isFileHovering ? (hovered ?? children) : children);
 
 	const openFile = (e: Event) => {
 		e?.preventDefault();
