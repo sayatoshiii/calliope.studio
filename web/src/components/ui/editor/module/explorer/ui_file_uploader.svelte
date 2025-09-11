@@ -1,9 +1,34 @@
-<script>
+<script lang="ts">
 	import { FilePlus, FileStack, ImageUp } from '@lucide/svelte';
 	import InputFile from '../../../input/file/input_file.svelte';
+	import type { UIFileUploaderProps } from './types';
+	import { uuid } from '../../../../../utils/misc/crypto';
+
+	let { project }: UIFileUploaderProps = $props();
+
+	const importMediaFiles = (files: File[]) => {
+		for (const file of files) {
+			let isDuplicate = Object.values(project?.media ?? {})?.some((media) => {
+				const mf = media?.file;
+				return (
+					mf?.name === file?.name &&
+					mf?.lastModified === file?.lastModified &&
+					mf?.size == file?.size
+				);
+			});
+			if (isDuplicate) continue;
+
+			project.media = {
+				...project.media,
+				[uuid.v4()]: {
+					file
+				}
+			};
+		}
+	};
 </script>
 
-<InputFile>
+<InputFile onDrop={importMediaFiles}>
 	{#snippet hovered(files)}
 		<section class="rounded">
 			{#if (files?.length ?? 0) > 1}
@@ -67,14 +92,16 @@
 
 		text-align: center;
 
-		span {
+		font-size: var(--muse-font-size-sm);
+		font-weight: 400;
+
+		color: var(--muse-colours-subtle-strong);
+
+		& span {
 			font-size: var(--muse-font-size-md);
 			font-weight: 600;
 
 			color: var(--muse-colours-muted-solid);
 		}
-
-		font-size: var(--muse-font-size-sm);
-		color: var(--muse-colours-subtle-strong);
 	}
 </style>

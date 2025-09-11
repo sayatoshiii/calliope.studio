@@ -21,6 +21,7 @@
 		let fileInput = document.createElement('input');
 		fileInput.style = 'display: none';
 		fileInput.type = 'file';
+		fileInput.multiple = true;
 		fileInput.onchange = () => {
 			let files: File[] = Array.from(fileInput.files as never);
 			onDrop?.(files);
@@ -51,7 +52,6 @@
 			e.stopPropagation();
 
 			let files: File[] = Array.from((e?.dataTransfer?.files as never) ?? []);
-			console.log(files);
 			onDrop?.(files);
 		});
 	});

@@ -1,3 +1,5 @@
+import type { Project } from '../../../../utils/editor/project/types';
+
 export enum EditorModulePosition {
   TOP_LEFT = 'left',
   TOP_RIGHT = 'right'
@@ -11,4 +13,5 @@ export enum EditorModuleType {
 export interface EditorModuleProps {
   position: EditorModulePosition;
   module: EditorModuleType;
+  project: Project;
 }

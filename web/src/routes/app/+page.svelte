@@ -12,6 +12,7 @@
 	import UiModule from '../../components/ui/editor/module/ui_module.svelte';
 	import { EditorModulePosition, EditorModuleType } from '../../components/ui/editor/module/types';
 	import UiNavbar from '../../components/ui/navigation/ui_navbar.svelte';
+	import type { Project } from '../../utils/editor/project/types';
 
 	const timeline: EditorTimelineProps = $state({
 		tracks: {
@@ -27,6 +28,10 @@
 		marker: 0
 	});
 
+	const project: Project = $state({
+		media: {}
+	});
+
 	onMount(() => {
 		if (!user) goto('/account/create');
 	});
@@ -35,9 +40,17 @@
 <app>
 	<UiNavbar />
 	<section>
-		<UiModule position={EditorModulePosition.TOP_LEFT} module={EditorModuleType.FILE_EXPLORER} />
+		<UiModule
+			position={EditorModulePosition.TOP_LEFT}
+			module={EditorModuleType.FILE_EXPLORER}
+			{project}
+		/>
 		<UiPreview />
-		<UiModule position={EditorModulePosition.TOP_RIGHT} module={EditorModuleType.INSPECTOR} />
+		<UiModule
+			position={EditorModulePosition.TOP_RIGHT}
+			module={EditorModuleType.INSPECTOR}
+			{project}
+		/>
 	</section>
 	<UiTimeline {...timeline} />
 </app>

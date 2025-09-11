@@ -6,7 +6,7 @@
 	import { EditorModuleType, type EditorModuleProps } from './types';
 	import UiFileExplorer from './explorer/ui_file_explorer.svelte';
 
-	let { position, module }: EditorModuleProps = $props();
+	let { position, module, project }: EditorModuleProps = $props();
 	let buttons = [
 		{ icon: FolderSearch, name: 'File Explorer', module: EditorModuleType.FILE_EXPLORER },
 		{ icon: SquareDashedMousePointer, name: 'Inspector', module: EditorModuleType.INSPECTOR }
@@ -39,7 +39,7 @@
 	</selector>
 
 	{#if SelectedModule}
-		<SelectedModule />
+		<SelectedModule {project} />
 	{/if}
 </section>
 
