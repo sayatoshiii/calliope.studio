@@ -8,7 +8,7 @@
 <div class="toolbar">
 	<section></section>
 	<section class="timestamp">
-		<p><strong>{formatTimestamp(project.timestamp)}</strong> / 02:30:00</p>
+		<p><strong>{formatTimestamp(project.timestamp)}</strong> / 05:00:000</p>
 	</section>
 	<section></section>
 </div>

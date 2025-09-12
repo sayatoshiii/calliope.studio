@@ -25,7 +25,7 @@ export enum TrackType {
 }
 
 export interface Clip {
-  id?: string;
-  timestamp?: number;
-  duration?: number;
+  id: string;
+  timestamp: number;
+  duration: number;
 }

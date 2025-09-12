@@ -68,3 +68,5 @@ export const formatTimestamp = (ms: number) => {
     `${millis.toString().padStart(3, '0')}`
   );
 };
+
+export const exportProject = (project: Project) => { };

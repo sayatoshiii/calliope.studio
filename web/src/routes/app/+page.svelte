@@ -6,6 +6,7 @@
 	import UiModule from '../../components/ui/editor/module/ui_module.svelte';
 	import { EditorModulePosition, EditorModuleType } from '../../components/ui/editor/module/types';
 	import { TrackType, type Project } from '../../utils/editor/project/types';
+	import UiNavbar from '../../components/ui/navigation/ui_navbar.svelte';
 
 	const project: Project = $state({
 		timestamp: 0,
@@ -30,6 +31,7 @@
 </script>
 
 <app>
+	<UiNavbar {project} />
 	<section>
 		<UiModule
 			position={EditorModulePosition.TOP_LEFT}

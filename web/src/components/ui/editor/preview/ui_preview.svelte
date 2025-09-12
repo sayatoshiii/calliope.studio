@@ -7,7 +7,7 @@
 </script>
 
 <section class="preview">
-	<UiPlayback />
+	<UiPlayback {project} />
 	<UiPlaybackControls {project} />
 </section>
 
