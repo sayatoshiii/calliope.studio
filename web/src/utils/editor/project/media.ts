@@ -55,3 +55,16 @@ export const addMediaToTrack = async (
     }
   ];
 };
+
+export const formatTimestamp = (ms: number) => {
+  let totalSeconds = Math.floor(ms / 1000);
+  let minutes = Math.floor(totalSeconds / 60);
+  let seconds = totalSeconds % 60;
+  let millis = ms % 1000;
+
+  return (
+    `${minutes.toString().padStart(2, '0')}:` +
+    `${seconds.toString().padStart(2, '0')}:` +
+    `${millis.toString().padStart(3, '0')}`
+  );
+};

@@ -1,4 +1,5 @@
 export interface Project {
+  timestamp: number;
   media?: Record<string, Media>;
   tracks?: Record<string, Track>;
 }

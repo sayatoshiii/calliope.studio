@@ -1,7 +1,14 @@
+<script lang="ts">
+	import { formatTimestamp } from '../../../../../utils/editor/project/media';
+	import type { Project } from '../../../../../utils/editor/project/types';
+
+	let { project }: { project: Project } = $props();
+</script>
+
 <div class="toolbar">
 	<section></section>
 	<section class="timestamp">
-		<p><strong>00:00:00</strong> / 02:30:00</p>
+		<p><strong>{formatTimestamp(project.timestamp)}</strong> / 02:30:00</p>
 	</section>
 	<section></section>
 </div>

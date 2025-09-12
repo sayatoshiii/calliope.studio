@@ -8,22 +8,24 @@
 	import { TrackType, type Project } from '../../utils/editor/project/types';
 
 	const project: Project = $state({
+		timestamp: 0,
 		media: {},
 		tracks: {
 			[uuid.v4()]: {
 				type: TrackType.VIDEO,
-				position: 1
+				position: 1,
+				clips: []
 			},
 			[uuid.v4()]: {
 				type: TrackType.AUDIO,
-				position: 2
+				position: 2,
+				clips: []
 			}
 		}
 	});
 
 	const timeline: EditorTimelineProps = $state({
-		project,
-		marker: 0
+		project
 	});
 </script>
 
@@ -34,7 +36,7 @@
 			module={EditorModuleType.FILE_EXPLORER}
 			{project}
 		/>
-		<UiPreview />
+		<UiPreview {project} />
 		<UiModule
 			position={EditorModulePosition.TOP_RIGHT}
 			module={EditorModuleType.INSPECTOR}

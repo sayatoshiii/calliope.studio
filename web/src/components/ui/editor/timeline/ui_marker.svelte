@@ -1,8 +1,11 @@
 <script lang="ts">
-	let { marker }: { marker: number } = $props();
+	import { pixelsPerMillisecond } from '../../../../utils/editor/project/media';
+	import type { Project } from '../../../../utils/editor/project/types';
+
+	let { project }: { project: Project } = $props();
 </script>
 
-<div class="marker" style={`--position: ${marker}px`}>
+<div class="marker" style={`--position: ${project.timestamp / pixelsPerMillisecond}px`}>
 	<div class="tag"></div>
 </div>
 
@@ -16,7 +19,10 @@
 		bottom: 0;
 
 		background-color: var(--muse-colours-muted-solid);
+
+		z-index: 2;
 		transform: translateX(var(--position));
+
 		transition: transform 0.15s ease;
 	}
 

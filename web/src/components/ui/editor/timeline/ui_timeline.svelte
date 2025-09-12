@@ -11,7 +11,7 @@
 	import { TooltipPosition } from '../../hints/tooltip/types';
 	import { TrackType } from '../../../../utils/editor/project/types';
 
-	let { project, zoom = 1, marker = 0 }: EditorTimelineProps = $props();
+	let { project, zoom = 1 }: EditorTimelineProps = $props();
 
 	const handleZoom = (e: WheelEvent) => {
 		if (!e.ctrlKey && !e.metaKey) return;
@@ -35,9 +35,9 @@
 </script>
 
 <section class="view">
-	<UiToolbar />
+	<UiToolbar {project} />
 	<div class="timeline" onwheel={handleZoom}>
-		<UiRuler {zoom} {marker} />
+		<UiRuler {project} {zoom} />
 
 		{#each Object.entries(project?.tracks ?? {}).sort(([, a], [, b]) => a.position - b.position) as [id, track]}
 			<UiTrack {project} {id} {track} />
