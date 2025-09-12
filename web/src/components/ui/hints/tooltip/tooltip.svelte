@@ -56,6 +56,8 @@
 		background-color: var(--muse-colours-subtle-light-solid);
 		color: var(--muse-colours-muted);
 
+		z-index: 999;
+
 		transform: scale(0.5, 0.25) translate(var(--posX), var(--posY));
 
 		opacity: 0;
