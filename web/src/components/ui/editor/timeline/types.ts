@@ -1,5 +1,7 @@
+import type { Project } from '../../../../utils/editor/project/types';
+
 export interface EditorTimelineProps {
-  tracks?: Record<string, EditorTimelineTrack>;
+  project: Project;
   zoom?: number;
   marker: number;
 }

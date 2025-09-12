@@ -2,6 +2,9 @@
 	import { onMount } from 'svelte';
 	import type { UIMediaLibraryProps } from './types';
 	import UiMediaThumbnail from './ui_media_thumbnail.svelte';
+	import { X } from '@lucide/svelte';
+	import InputButton from '../../../../input/button/input_button.svelte';
+	import { MuseUIColour } from '../../../../types';
 
 	let { project }: UIMediaLibraryProps = $props();
 
@@ -22,9 +25,21 @@
 </script>
 
 <section class="library" style={`--relativeHeight: ${relativeHeight}px`} bind:this={library}>
-	{#each Object.entries(project?.media ?? {}) as [_, media]}
-		<div class="media rounded">
+	{#each Object.entries(project?.media ?? {}) as [id, media]}
+		<div class="media rounded" draggable={true}>
 			<UiMediaThumbnail class="thumbnail" file={media.file} />
+			<div class="controls">
+				<InputButton
+					colour={MuseUIColour.MUTED}
+					style="padding: 2px;border-radius: 100%;"
+					onclick={() => {
+						if (!project?.media) return;
+						delete project.media[id];
+					}}
+				>
+					<X size={16} color={'var(--muse-colours-muted-solid)'} />
+				</InputButton>
+			</div>
 			<div class="label rounded">{media.file.name}</div>
 		</div>
 	{/each}
@@ -58,9 +73,9 @@
 		display: flex;
 		flex: 1 1 33.3%;
 
+		flex-flow: column;
 		flex-shrink: 1;
 
-		align-items: flex-end;
 		justify-content: space-between;
 
 		background-color: var(--muse-colours-subtle-light);
@@ -69,6 +84,10 @@
 		user-select: none;
 
 		overflow: hidden;
+
+		&:hover .controls {
+			opacity: 1;
+		}
 	}
 
 	:global(.thumbnail) {
@@ -81,7 +100,18 @@
 		flex-shrink: 1;
 	}
 
+	.controls {
+		display: flex;
+		flex-flow: row wrap;
+
+		justify-content: flex-end;
+
+		opacity: 0;
+		transition: opacity 0.15s ease;
+	}
+
 	.label {
+		width: fit-content;
 		min-width: 0;
 		max-width: 75%;
 

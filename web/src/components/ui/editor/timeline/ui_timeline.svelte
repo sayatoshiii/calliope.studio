@@ -10,7 +10,7 @@
 	import Tooltip from '../../hints/tooltip/tooltip.svelte';
 	import { TooltipPosition } from '../../hints/tooltip/types';
 
-	let { tracks, zoom = 1, marker = 0 }: EditorTimelineProps = $props();
+	let { project, zoom = 1, marker = 0 }: EditorTimelineProps = $props();
 
 	const handleZoom = (e: WheelEvent) => {
 		if (!e.ctrlKey && !e.metaKey) return;
@@ -21,12 +21,12 @@
 	};
 
 	const handleNewTrack = (type: EditorTimelineTrackType = EditorTimelineTrackType.VIDEO) => {
-		tracks = {
-			...tracks,
+		project.tracks = {
+			...project?.tracks,
 			...{
 				[uuid.v4()]: {
 					type,
-					position: Object.keys(tracks ?? {}).length + 1
+					position: Object.keys(project?.tracks ?? {}).length + 1
 				} as never
 			}
 		};
@@ -38,7 +38,7 @@
 	<div class="timeline" onwheel={handleZoom}>
 		<UiRuler {zoom} {marker} />
 
-		{#each Object.entries(tracks ?? {}).sort(([, a], [, b]) => a.position - b.position) as [id, track]}
+		{#each Object.entries(project?.tracks ?? {}).sort(([, a], [, b]) => a.position - b.position) as [id, track]}
 			<UiTrack {id} {track} />
 		{/each}
 

@@ -14,7 +14,8 @@
 	import UiNavbar from '../../components/ui/navigation/ui_navbar.svelte';
 	import type { Project } from '../../utils/editor/project/types';
 
-	const timeline: EditorTimelineProps = $state({
+	const project: Project = $state({
+		media: {},
 		tracks: {
 			[uuid.v4()]: {
 				type: EditorTimelineTrackType.VIDEO,
@@ -24,12 +25,12 @@
 				type: EditorTimelineTrackType.AUDIO,
 				position: 2
 			}
-		},
-		marker: 0
+		}
 	});
 
-	const project: Project = $state({
-		media: {}
+	const timeline: EditorTimelineProps = $state({
+		project,
+		marker: 0
 	});
 
 	onMount(() => {

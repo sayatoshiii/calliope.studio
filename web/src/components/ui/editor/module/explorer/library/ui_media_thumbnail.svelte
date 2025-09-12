@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { classNames } from '../../../../../../utils/misc/utilities';
 	import type { UIMediaThumbnailProps } from './types';
 
@@ -27,26 +28,28 @@
 				resolve(canvas.toDataURL('image/png'));
 			});
 
-			video.addEventListener('error', (e) => {
+			video.addEventListener('error', () => {
 				reject(new Error('Could not load video'));
 			});
 		});
 	}
 
-	const fileType = file.type.split('/')[0];
+	$effect(() => {
+		const fileType = file.type.split('/')[0];
 
-	(async () => {
 		switch (fileType) {
 			case 'image':
 				thumbnail = URL.createObjectURL(file);
 				break;
 			case 'video':
-				thumbnail = (await generateVideoThumbnail(file)) ?? '';
+				(async () => {
+					thumbnail = (await generateVideoThumbnail(file)) ?? '';
+				})();
 				break;
 			default:
 				break;
 		}
-	})();
+	});
 </script>
 
 {#if thumbnail}
