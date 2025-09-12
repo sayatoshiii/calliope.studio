@@ -32,9 +32,9 @@
 					const media = project.media?.[clip.id];
 					if (!media) continue;
 					const seconds = clip.duration / 1000;
+					const segName = `seg_${clip.id}.mp4`;
 
 					if (media.file.type.startsWith('image/')) {
-						const segName = `seg_${clip.id}.mp4`;
 						await ffmpeg.exec([
 							'-loop',
 							'1',
@@ -42,16 +42,30 @@
 							String(seconds),
 							'-i',
 							(media as any)._ffmpegName,
+							'-vf',
+							'scale=1280:720,fps=30',
 							'-c:v',
 							'libx264',
 							'-pix_fmt',
 							'yuv420p',
 							segName
 						]);
-						concatList.push(`file '${segName}'`);
-					} else {
-						concatList.push(`file '${(media as any)._ffmpegName}'`);
+					} else if (media.file.type.startsWith('video/')) {
+						await ffmpeg.exec([
+							'-i',
+							(media as any)._ffmpegName,
+							'-t',
+							String(seconds),
+							'-vf',
+							'scale=1280:720,fps=30',
+							'-c:v',
+							'libx264',
+							'-pix_fmt',
+							'yuv420p',
+							segName
+						]);
 					}
+					concatList.push(`file '${segName}'`);
 				}
 			}
 
