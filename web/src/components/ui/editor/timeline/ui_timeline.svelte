@@ -39,7 +39,7 @@
 		<UiRuler {zoom} {marker} />
 
 		{#each Object.entries(project?.tracks ?? {}).sort(([, a], [, b]) => a.position - b.position) as [id, track]}
-			<UiTrack {id} {track} />
+			<UiTrack {project} {id} {track} />
 		{/each}
 
 		<aside class="manage">

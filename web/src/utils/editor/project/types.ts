@@ -8,3 +8,8 @@ export interface Project {
 export interface Media {
   file: File;
 }
+
+export interface MediaLength {
+  time: number;
+  size: number;
+}
