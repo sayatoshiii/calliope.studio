@@ -4,11 +4,12 @@
 	import { MuseUIColour } from '../../types';
 	import UiToolbar from './toolbar/ui_toolbar.svelte';
 	import UiTrack from './track/ui_track.svelte';
-	import { EditorTimelineTrackType, type EditorTimelineProps } from './types';
+	import { type EditorTimelineProps } from './types';
 	import UiRuler from './ui_ruler.svelte';
 	import { uuid } from '../../../../utils/misc/crypto';
 	import Tooltip from '../../hints/tooltip/tooltip.svelte';
 	import { TooltipPosition } from '../../hints/tooltip/types';
+	import { TrackType } from '../../../../utils/editor/project/types';
 
 	let { project, zoom = 1, marker = 0 }: EditorTimelineProps = $props();
 
@@ -20,7 +21,7 @@
 		zoom = Math.min(Math.max(zoom * scale, 0.1), 20);
 	};
 
-	const handleNewTrack = (type: EditorTimelineTrackType = EditorTimelineTrackType.VIDEO) => {
+	const handleNewTrack = (type: TrackType = TrackType.VIDEO) => {
 		project.tracks = {
 			...project?.tracks,
 			...{
@@ -59,7 +60,7 @@
 				<InputButton
 					colour={MuseUIColour.MUTED}
 					class="rounded"
-					onclick={() => handleNewTrack(EditorTimelineTrackType.AUDIO)}
+					onclick={() => handleNewTrack(TrackType.AUDIO)}
 				>
 					<ListMusic size={20} />
 				</InputButton>

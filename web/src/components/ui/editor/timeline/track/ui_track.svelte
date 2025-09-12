@@ -1,14 +1,23 @@
 <script lang="ts">
 	import { AudioLines, Film } from '@lucide/svelte';
-	import { EditorTimelineTrackType, type EditorTimelineTrack } from '../types';
 	import { classNames } from '../../../../../utils/misc/utilities';
 	import UiMediaThumbnail from '../../module/explorer/library/ui_media_thumbnail.svelte';
-	import type { MediaLength, Project } from '../../../../../utils/editor/project/types';
-	import { getMediaLength } from '../../../../../utils/editor/project/media';
-	let { project, track }: { project: Project; id: string; track: EditorTimelineTrack } = $props();
+	import {
+		TrackType,
+		type MediaLength,
+		type Project,
+		type Track
+	} from '../../../../../utils/editor/project/types';
+	import {
+		addMediaToTrack,
+		defaultLength,
+		getMediaLength,
+		pixelsPerMillisecond
+	} from '../../../../../utils/editor/project/media';
+	let { project, id, track }: { project: Project; id: string; track: Track } = $props();
 
-	let trackType = track?.type === EditorTimelineTrackType.VIDEO ? 'Video' : 'Audio';
-	let TrackIcon = $derived(track?.type === EditorTimelineTrackType.VIDEO ? Film : AudioLines);
+	let trackType = track?.type === TrackType.VIDEO ? 'Video' : 'Audio';
+	let TrackIcon = $derived(track?.type === TrackType.VIDEO ? Film : AudioLines);
 
 	let isDragging = true;
 	let draggedMedia: { id: string; pos: number; length: MediaLength } | undefined = $state();
@@ -31,8 +40,6 @@
 			pos: x,
 			length: await getMediaLength(project, media)
 		};
-
-		console.log(draggedMedia);
 	};
 
 	const onDragLeave = () => {
@@ -48,7 +55,17 @@
 		e.stopPropagation();
 		e.preventDefault();
 
-		draggedMedia = undefined;
+		const target = e.currentTarget as HTMLElement;
+		const rect = target.getBoundingClientRect();
+		const x = e.clientX - rect.left;
+
+		const media = e?.dataTransfer?.getData('text/plain');
+		if (!media) return;
+
+		addMediaToTrack(project, id, media, x / pixelsPerMillisecond);
+		setTimeout(() => {
+			draggedMedia = undefined;
+		}, 50);
 	};
 </script>
 
@@ -74,6 +91,14 @@
 				<UiMediaThumbnail file={project.media?.[draggedMedia?.id]?.file as File} />
 			</div>
 		{/if}
+		{#each track.clips as clip}
+			<div
+				class="clip rounded"
+				style={`--pos: ${(clip?.timestamp ?? 0) * pixelsPerMillisecond}px;--size: ${(clip?.duration ?? defaultLength) / pixelsPerMillisecond}px`}
+			>
+				<UiMediaThumbnail file={project.media?.[clip?.id ?? '']?.file as File} class="thumbnail" />
+			</div>
+		{/each}
 	</div>
 </section>
 
@@ -113,7 +138,8 @@
 		background-color: var(--muse-colours-subtle-very-light);
 	}
 
-	.dragged {
+	.dragged,
+	.clip {
 		width: var(--size);
 		height: 100%;
 
@@ -123,6 +149,14 @@
 		position: absolute;
 		overflow: hidden;
 
-		transition: all 0.15s ease;
+		background-color: var(--muse-colours-subtle-light);
+
+		& :global(img) {
+			width: 100%;
+			height: 100%;
+			z-index: 1 !important;
+		}
+
+		transition: left 0.15s ease;
 	}
 </style>

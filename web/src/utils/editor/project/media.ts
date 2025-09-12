@@ -1,7 +1,7 @@
 import type { MediaLength, Project } from './types';
 
-const defaultLength = 5000;
-const pixelsPerMillisecond = 100;
+export const defaultLength = 5000;
+export const pixelsPerMillisecond = 100;
 
 export const getMediaLength = async (project: Project, id: string): Promise<MediaLength> => {
   const media = project?.media?.[id];
@@ -35,4 +35,23 @@ export const getVideoLength = async (file: File): Promise<number> => {
       reject(new Error('Failed to handle video'));
     };
   });
+};
+
+export const addMediaToTrack = async (
+  project: Project,
+  trackId: string,
+  mediaId: string,
+  timestamp: number
+) => {
+  if (!project.tracks) project.tracks = {};
+  const clips = project?.tracks?.[trackId]?.clips ?? [];
+
+  project.tracks[trackId].clips = [
+    ...clips,
+    {
+      id: mediaId,
+      timestamp,
+      duration: (await getMediaLength(project, mediaId)).time
+    }
+  ];
 };

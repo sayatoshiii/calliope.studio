@@ -1,8 +1,6 @@
-import type { EditorTimelineTrack } from '../../../components/ui/editor/timeline/types';
-
 export interface Project {
   media?: Record<string, Media>;
-  tracks?: Record<string, EditorTimelineTrack>;
+  tracks?: Record<string, Track>;
 }
 
 export interface Media {
@@ -12,4 +10,21 @@ export interface Media {
 export interface MediaLength {
   time: number;
   size: number;
+}
+
+export interface Track {
+  type: TrackType;
+  position: number;
+  clips: Clip[];
+}
+
+export enum TrackType {
+  VIDEO,
+  AUDIO
+}
+
+export interface Clip {
+  id?: string;
+  timestamp?: number;
+  duration?: number;
 }

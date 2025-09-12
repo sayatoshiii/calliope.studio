@@ -1,28 +1,21 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
-	import { user } from '../../utils/database/client/account';
 	import UiTimeline from '../../components/ui/editor/timeline/ui_timeline.svelte';
 	import { uuid } from '../../utils/misc/crypto';
-	import {
-		EditorTimelineTrackType,
-		type EditorTimelineProps
-	} from '../../components/ui/editor/timeline/types';
+	import { type EditorTimelineProps } from '../../components/ui/editor/timeline/types';
 	import UiPreview from '../../components/ui/editor/preview/ui_preview.svelte';
 	import UiModule from '../../components/ui/editor/module/ui_module.svelte';
 	import { EditorModulePosition, EditorModuleType } from '../../components/ui/editor/module/types';
-	import UiNavbar from '../../components/ui/navigation/ui_navbar.svelte';
-	import type { Project } from '../../utils/editor/project/types';
+	import { TrackType, type Project } from '../../utils/editor/project/types';
 
 	const project: Project = $state({
 		media: {},
 		tracks: {
 			[uuid.v4()]: {
-				type: EditorTimelineTrackType.VIDEO,
+				type: TrackType.VIDEO,
 				position: 1
 			},
 			[uuid.v4()]: {
-				type: EditorTimelineTrackType.AUDIO,
+				type: TrackType.AUDIO,
 				position: 2
 			}
 		}
@@ -32,14 +25,9 @@
 		project,
 		marker: 0
 	});
-
-	onMount(() => {
-		if (!user) goto('/account/create');
-	});
 </script>
 
 <app>
-	<UiNavbar />
 	<section>
 		<UiModule
 			position={EditorModulePosition.TOP_LEFT}
