@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+:root {
+  --muse-layout-spacing-xsm: 2px;
+  --muse-layout-spacing-sm: 5px;
+  --muse-layout-spacing-md: 10px;
+  --muse-layout-spacing-lg: 15px;
+
+  --muse-colours-background: hsl(240, 19%, 6%);
+  --muse-colours-foreground: hsl(240, 12%, 8%);
+
+  --muse-colours-primary-solid: hsl(163, 61%, 33%);
+  --muse-colours-primary-bg-solid: var(--muse-colours-primary-solid);
+
+  --muse-colours-subtle-very-light: hsla(0, 0%, 100%, 0.025);
+  --muse-colours-subtle-light: hsla(0, 0%, 100%, 0.05);
+  --muse-colours-subtle-light-solid: hsl(240, 11%, 11%);
+  --muse-colours-subtle-medium: hsla(0, 0%, 100%, 0.1);
+  --muse-colours-subtle-strong: hsla(0, 0%, 100%, 0.15);
+  
+  --muse-colours-muted:hsla(0, 0%, 100%, 0.45);
+  --muse-colours-muted-solid: hsl(240, 4%, 45%);
+  --muse-colours-muted-background: hsl(240, 10%, 14%);
+  --muse-colours-semi-important: hsla(0, 0%, 100%, 0.65);
+  --muse-colours-important: hsla(0, 0%, 100%, 0.85);
+
+  --muse-font-size-xsm: 12px;
+  --muse-font-size-sm: 14px;
+  --muse-font-size-md: 16px;
+  --muse-font-size-lg: 24px;
+}
+
+html,body {
+  min-height: 100vh;
+}
+
+body {
+  background-color: var(--muse-colours-background);
+  margin: 0;
+
+  font-size: var(--muse-font-size-md);
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.rounded {
+  border-radius: 6px;
+}
